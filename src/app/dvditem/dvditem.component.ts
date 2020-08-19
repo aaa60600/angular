@@ -60,5 +60,8 @@ export class DvditemComponent implements OnInit {
     this.dvditemService.deleteDvditem(number).subscribe();
     this.getDvditems();
   }
+  save(): void {
+    this.dvditemService.getDvditems();
+  }
 
 }
