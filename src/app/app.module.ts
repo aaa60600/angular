@@ -8,13 +8,16 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatButtonModule } from '@angular/material';
 import { HttpClientModule } from '@angular/common/http';
 import { DvditemComponent } from './dvditem/dvditem.component';
-import { HeroesComponent } from './heroes/heroes.component';
+
+
+import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
+import { InMemoryDataService }  from './in-memory-data.service';
+
 
 @NgModule({
   declarations: [
     AppComponent,
     DvditemComponent,
-    HeroesComponent,
   ],
   imports: [
     BrowserModule,
@@ -22,6 +25,9 @@ import { HeroesComponent } from './heroes/heroes.component';
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
+    HttpClientInMemoryWebApiModule.forRoot(
+      InMemoryDataService, { dataEncapsulation: false }
+    )
   ],
   providers: [],
   bootstrap: [AppComponent]

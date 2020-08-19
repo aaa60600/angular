@@ -1,22 +1,47 @@
 <div class="example-form">
-  <div><span>id: </span></div>
+  <div>
+    <span>id: </span> 
+    <input type="text" #dvditemId /><br>
+  </div>
   <label>Title:
-    <input type="text" /><br>
+    <input type="text" #dvditemTitle /><br>
   </label>
   <label>Date:
-    <input type="date" /><br>
+    <input type="date" #dvditemDate/><br>
   </label>
   <label>Gener:
-    <input type="text" /><br>
+    <input type="text" #dvditemGener/><br>
   </label>
   <label>Desc:
-    <input type="text" /><br>
+    <input type="text" #dvditemDesc/><br>
   </label>
   <br>
-  <button class="clear">Create</button>
-  <button class="clear">Update</button>
-  <button class="clear">Delete</button>
-  <button class="clear">Select</button>
+  <button class="clear" (click)="createDvditem(
+    dvditemTitle.value,
+    dvditemDate.value,
+    dvditemGener.value,
+    dvditemDesc.value
+    ); 
+    dvditemTitle.value='';
+    dvditemDate.value='';
+    dvditemGener.value='';
+    dvditemDesc.value='';
+    ">Create</button>
+  <button class="clear" (click)="updateDvditem(
+    dvditemId.value,
+    dvditemTitle.value,
+    dvditemDate.value,
+    dvditemGener.value,
+    dvditemDesc.value
+    ); 
+    dvditemId.value='';
+    dvditemTitle.value='';
+    dvditemDate.value='';
+    dvditemGener.value='';
+    dvditemDesc.value='';
+    ">Update</button>
+  <button class="clear" (click)="delete(dvditemId.value);dvditemId.value='';">Delete</button>
+  <button class="clear" (click)="getDvditems()">Select</button>
 
   <table>
     <thead>
@@ -25,7 +50,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let el of dataSource">
+      <tr *ngFor="let el of dvditems$ | async">
         <th>{{el.id}}</th>
         <td>{{el.title}}</td>
         <td>{{el.date}}</td>
