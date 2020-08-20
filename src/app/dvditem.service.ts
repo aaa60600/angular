@@ -3,7 +3,6 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import {Dvditem} from './dvditem'
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
-import { MessageService } from './message.service';
 @Injectable({
   providedIn: 'root'
 })
@@ -12,9 +11,10 @@ export class DvditemService {
   httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' })
   };
-  constructor(
-    private http: HttpClient,
-    private messageService: MessageService) { }
+  constructor(private http: HttpClient,) { }
+
+
+  
   getDvditems(): Observable<Dvditem[]> {
     return this.http.get<Dvditem[]>(this.dvditemsUrl)
     .pipe(

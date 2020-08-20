@@ -8,16 +8,16 @@ import { Dvditem } from './dvditem';
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
     const dvditems = [
-      { id: 11, title: 'Hydrogen', date: '2020-08-03T16:00:00.000Z', genre: 'H', dsc: 'test' },
-      { id: 12, title: 'Helium', date: '2020-08-03T16:00:00.000Z', genre: 'He', dsc: 'test' },
-      { id: 13, title: 'Lithium', date: '2020-08-03T16:00:00.000Z', genre: 'Li', dsc: 'test' },
-      { id: 14, title: 'Beryllium', date: '2020-08-03T16:00:00.000Z', genre: 'Be', dsc: 'test' },
-      { id: 15, title: 'Boron', date: '2020-08-03T16:00:00.000Z', genre: 'B', dsc: 'test' },
-      { id: 16, title: 'Carbon', date: '2020-08-03T16:00:00.000Z', genre: 'C', dsc: 'test' },
-      { id: 17, title: 'Nitrogen', date: '2020-08-03T16:00:00.000Z', genre: 'N', dsc: 'test' },
-      { id: 18, title: 'Oxygen', date: '2020-08-03T16:00:00.000Z', genre: 'O', dsc: 'test' },
-      { id: 19, title: 'Fluorine', date: '2020-08-03T16:00:00.000Z', genre: 'F', dsc: 'test' },
-      { id: 20, title: 'Neon', date: '2020-08-03T16:00:00.000Z', genre: 'Ne', dsc: 'test' },
+      { id: 1, title: 'Hydrogen', date: '2020-08-03T16:00:00.000Z', genre: 'H', dsc: 'test' },
+      { id: 2, title: 'Helium', date: '2020-08-03T16:00:00.000Z', genre: 'He', dsc: 'test' },
+      { id: 3, title: 'Lithium', date: '2020-08-03T16:00:00.000Z', genre: 'Li', dsc: 'test' },
+      { id: 4, title: 'Beryllium', date: '2020-08-03T16:00:00.000Z', genre: 'Be', dsc: 'test' },
+      { id: 5, title: 'Boron', date: '2020-08-03T16:00:00.000Z', genre: 'B', dsc: 'test' },
+      { id: 6, title: 'Carbon', date: '2020-08-03T16:00:00.000Z', genre: 'C', dsc: 'test' },
+      { id: 7, title: 'Nitrogen', date: '2020-08-03T16:00:00.000Z', genre: 'N', dsc: 'test' },
+      { id: 8, title: 'Oxygen', date: '2020-08-03T16:00:00.000Z', genre: 'O', dsc: 'test' },
+      { id: 9, title: 'Fluorine', date: '2020-08-03T16:00:00.000Z', genre: 'F', dsc: 'test' },
+      { id: 10, title: 'Neon', date: '2020-08-03T16:00:00.000Z', genre: 'Ne', dsc: 'test' },
     ];
     return {dvditems};
   }

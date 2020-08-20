@@ -2,10 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Dvditem } from '../dvditem';
 import {DvditemService} from '../dvditem.service'
 import { Observable, Subject } from 'rxjs';
-// import {
-//   debounceTime, distinctUntilChanged, switchMap
-// } from 'rxjs/operators';
-
 @Component({
   selector: 'app-dvditem',
   templateUrl: './dvditem.component.html',
@@ -15,13 +11,28 @@ export class DvditemComponent implements OnInit {
   displayedColumns: string[] = ['id', 'title', 'date', 'genre', 'dsc'];
   dvditems$: Observable<any>;
   dvditem$: Observable<Dvditem>;
+  selectedDvditem:Dvditem;
   constructor(
     private dvditemService:DvditemService,
   ) { }
 
 
-  ngOnInit() {}
+  ngOnInit() {
+    this.getDvditems();
+    this.initDvditem();
+  }
 
+  initDvditem():void{
+    const item={
+      id:null,
+      title:"",
+      date:"",
+      genre:"",
+      dsc:""
+  }
+    this.selectedDvditem=item;
+
+  }
   getDvditems(): void {
     this.dvditems$ =this.dvditemService.getDvditems();
     
@@ -36,17 +47,17 @@ export class DvditemComponent implements OnInit {
     this.dvditemService.createDvditem({ title,date,genre,dsc } as Dvditem)
     .subscribe();
     this.getDvditems();
+    this.initDvditem();
   }
 
-  updateDvditem(number:string,title:string,date:string,genre:string,dsc:string):void{
-    number= number.trim();
+  updateDvditem(title:string,date:string,genre:string,dsc:string):void{
     title = title.trim();
     date = date.trim();
     genre = genre.trim();
     dsc = dsc.trim();
-    if (!number || !title || !date || !genre|| !dsc) { return; }
+    if ( !title || !date || !genre|| !dsc) { return; }
     const item={
-      id:Number(number),
+      id:this.selectedDvditem.id,
       title,
       date,
       genre,
@@ -54,14 +65,17 @@ export class DvditemComponent implements OnInit {
   }
     this.dvditemService.updateDvditem(item)
     .subscribe(()=> this.getDvditems());
+    this.initDvditem();
   }
 
-  delete(number:String): void {
-    this.dvditemService.deleteDvditem(number).subscribe();
+  delete(number:Number): void {
+    this.dvditemService.deleteDvditem(number.toString()).subscribe();
     this.getDvditems();
+    this.initDvditem();
   }
-  save(): void {
-    this.dvditemService.getDvditems();
+  onSelect(dvditem: Dvditem): void {
+    this.selectedDvditem= Object.assign({}, dvditem);
+    const date = this.selectedDvditem.date.split("T",1)[0];
+    this.selectedDvditem.date=date;
   }
-
 }

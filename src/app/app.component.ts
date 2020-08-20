@@ -14,7 +14,7 @@ import { Observable, of } from 'rxjs';
 })
 export class AppComponent {
 
-  // Data = ELEMENT_DATA;
+  //Data = ELEMENT_DATA;
   // dvditem: Dvditem;
   // navStart = new Observable(subscriber => {
   //   subscriber.next(this.Data);

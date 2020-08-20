@@ -40,6 +40,12 @@ table, th , td {
   padding: 5px;
 }
 
+
+tr:active {
+  background-color: #BBD8DC;
+  color: rgb(134, 134, 221);
+}
+
 table tr:nth-child(odd) {
   background-color: #f1f1f1;
 }
@@ -54,6 +60,7 @@ table tr:nth-child(even) {
   width: 100%;
   margin-left: 20px;
 }
+
 /*
 Copyright Google LLC. All Rights Reserved.
 Use of this source code is governed by an MIT-style license that
