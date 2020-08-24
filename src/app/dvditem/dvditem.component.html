@@ -1,53 +1,89 @@
 <div class="example-form">
-  <div>
-    <span>id: </span> {{selectedDvditem.id}}<br>
-  <label>Title:
-    <input type="text"  [(ngModel)]="selectedDvditem.title"/><br>
-  </label>
-  <label>Date:
-    <input type="date"   [(ngModel)]="selectedDvditem.date" name="selectedDvditem.date"/><br>
-  </label><br>
-  <label>Gener:
-    <input type="text"  [(ngModel)]="selectedDvditem.genre"/><br>
-  </label><br>
-  <label>Desc:
-    <input type="text"  [(ngModel)]="selectedDvditem.dsc"/><br>
-  </label><br>
-  </div>
+  <h1>Dvditem test</h1>
+  JSON:{{json}}
   <br>
-  <button class="clear" (click)="createDvditem(
-    selectedDvditem.title,
-    selectedDvditem.date,
-    selectedDvditem.genre,
-    selectedDvditem.dsc
-    ); 
-    ">Create</button>
-  <button class="clear" (click)="updateDvditem(
-    selectedDvditem.title,
-    selectedDvditem.date,
-    selectedDvditem.genre,
-    selectedDvditem.dsc
-    ); 
-    ">Update</button>
-  <button class="clear" (click)="delete(selectedDvditem.id)">Delete</button>
-  <button class="clear" (click)="getDvditems()">Select</button>
+  <mat-form-field class="example-form-field">
+    <mat-label>id:</mat-label>
+    <input matInput type="text" [(ngModel)]="selectedDvditem.id">
+    <button mat-button *ngIf="selectedDvditem.id" matSuffix mat-icon-button aria-label="Clear"
+      (click)="selectedDvditem.id=''">
+      <mat-icon>close</mat-icon>
+    </button>
+  </mat-form-field>
+  <br>
+  <mat-form-field class="example-full-width">
+    <mat-label>Title:</mat-label>
+    <input matInput placeholder="title" [(ngModel)]="selectedDvditem.title">
+  </mat-form-field>
+  <mat-form-field class="date">
+    <mat-label>Date:</mat-label>
+    <input matInput [matDatepicker]="picker" [(ngModel)]="selectedDvditem.date">
+    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+    <mat-datepicker #picker></mat-datepicker>
+  </mat-form-field>
+  <mat-form-field class="example-full-width">
+    <mat-label>Genre:</mat-label>
+    <input matInput placeholder="genre" [(ngModel)]="selectedDvditem.genre">
+  </mat-form-field>
+  <mat-form-field class="dsc">
+    <mat-label>Dsc:</mat-label>
+    <input matInput placeholder="dsc" [(ngModel)]="selectedDvditem.dsc">
+  </mat-form-field>
+  <div class="example-button-row">
+    <button mat-raised-button color="primary" (click)="createDvditem(
+        selectedDvditem.title,
+        selectedDvditem.date,
+        selectedDvditem.genre,
+        selectedDvditem.dsc
+        ); 
+        ">Create</button>
+    <button mat-raised-button color="accent" (click)="updateDvditem(
+        selectedDvditem.title,
+        selectedDvditem.date,
+        selectedDvditem.genre,
+        selectedDvditem.dsc
+        ); 
+        ">Update</button>
+    <button mat-raised-button color="warn" (click)="delete(selectedDvditem.id)">Delete</button>
+    <button mat-button (click)="getDvditems()">Select</button>
+  </div>
+  <table mat-table [dataSource]="dvditems$" class="mat-elevation-z8">
 
-  <table>
-    <thead>
-      <tr>
-        <th *ngFor="let head of displayedColumns" scope="col">{{head}} </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let el of dvditems$ | async"  
-        [class.selected]="el === selectedDvditem"
-        (click)="onSelect(el)">
-        <th>{{el.id}}</th>
-        <td>{{el.title}}</td>
-        <td>{{el.date}}</td>
-        <td>{{el.genre}}</td>
-        <td>{{el.dsc}}</td>
-      </tr>
-    </tbody>
+    <!--- Note that these columns can be defined in any order.
+        The actual rendered columns are set as a property on the row definition" -->
+
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef class="row-item"> No. </th>
+      <td mat-cell *matCellDef="let element" class="row-item"> {{element.id}} </td>
+    </ng-container>
+
+    <!-- Name Column -->
+    <ng-container matColumnDef="title">
+      <th mat-header-cell *matHeaderCellDef class="row-item"> Title </th>
+      <td mat-cell *matCellDef="let element" class="row-item"> {{element.title}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef class="row-item"> Date </th>
+      <td mat-cell *matCellDef="let element" class="row-item"> {{element.date}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="genre">
+      <th mat-header-cell *matHeaderCellDef class="row-item"> Genre </th>
+      <td mat-cell *matCellDef="let element" class="row-item"> {{element.genre}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="dsc">
+      <th mat-header-cell *matHeaderCellDef class="row-item"> Dsc </th>
+      <td mat-cell *matCellDef="let element" class="row-item"> {{element.dsc}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;" (click)="onSelect(row)">
+    </tr>
   </table>
 </div>
